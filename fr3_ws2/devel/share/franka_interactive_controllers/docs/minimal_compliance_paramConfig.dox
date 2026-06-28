@@ -1,0 +1,6 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~activate_tool_compensation" : \b [bool] trigger to activate external tool compensation (the desired compensation forces defined in ./config) min: False, default: True, max: True
+

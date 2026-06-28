@@ -1,0 +1,10 @@
+\subsubsection usage Usage
+\verbatim
+<node name="dynamic_compliance" pkg="franka_interactive_controllers" type="dynamic_compliance">
+  <param name="activate_tool_compensation" type="bool" value="True" />
+  <param name="set_locked_joints_position" type="bool" value="False" />
+  <param name="activate_lock_joint6" type="bool" value="False" />
+  <param name="activate_lock_joint7" type="bool" value="False" />
+</node>
+\endverbatim
+

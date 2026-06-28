@@ -1,0 +1,4 @@
+cleaning_adaptive
+/home/ravi/fr3_ws/devel/.private/cleaning_adaptive/lib/pkgconfig/cleaning_adaptive.pc /home/ravi/fr3_ws/devel/lib/pkgconfig/cleaning_adaptive.pc
+/home/ravi/fr3_ws/devel/.private/cleaning_adaptive/share/cleaning_adaptive/cmake/cleaning_adaptiveConfig.cmake /home/ravi/fr3_ws/devel/share/cleaning_adaptive/cmake/cleaning_adaptiveConfig.cmake
+/home/ravi/fr3_ws/devel/.private/cleaning_adaptive/share/cleaning_adaptive/cmake/cleaning_adaptiveConfig-version.cmake /home/ravi/fr3_ws/devel/share/cleaning_adaptive/cmake/cleaning_adaptiveConfig-version.cmake

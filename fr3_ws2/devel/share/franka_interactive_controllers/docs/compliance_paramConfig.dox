@@ -1,0 +1,10 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~translational_stiffness" : \b [double] Cartesian translational stiffness min: 0.0, default: 0.0, max: 600.0
+- \b "~rotational_stiffness" : \b [double] Cartesian rotational stiffness min: 0.0, default: 30.0, max: 60.0
+- \b "~nullspace_stiffness" : \b [double] Stiffness of the joint space nullspace controller (the desired configuration is the one at startup) min: 0.0, default: 0.01, max: 100.0
+- \b "~activate_tool_compensation" : \b [bool] trigger to activate external tool compensation (the desired compensation forces defined in ./config) min: False, default: True, max: True
+- \b "~update_impedance_params" : \b [bool] Will update the impedance parameters when set to True min: False, default: False, max: True
+

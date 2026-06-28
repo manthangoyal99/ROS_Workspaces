@@ -1,0 +1,2 @@
+camera_calibration:cleaning_adaptive:easy_kinesthetic_recording:franka_interactive_controllers:franka_ros/franka_control:franka_ros/franka_description:franka_ros/franka_example_controllers:franka_ros/franka_gazebo:franka_ros/franka_gripper:franka_ros/franka_hw:franka_ros/franka_msgs:franka_ros/franka_ros:franka_ros/franka_visualization:record_ros
+-DCATKIN_DEVEL_PREFIX=/home/ravi/fr3_ws2/devel -DCMAKE_INSTALL_PREFIX=/home/ravi/fr3_ws2/install -G Unix Makefiles

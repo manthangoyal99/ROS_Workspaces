@@ -1,0 +1,7 @@
+\subsubsection usage Usage
+\verbatim
+<node name="minimal_dynamic_compliance" pkg="franka_interactive_controllers" type="minimal_dynamic_compliance">
+  <param name="activate_tool_compensation" type="bool" value="True" />
+</node>
+\endverbatim
+

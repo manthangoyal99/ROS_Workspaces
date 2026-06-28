@@ -1,0 +1,8 @@
+prefix=/home/ravi/fr3_ws2/devel
+
+Name: franka_gripper
+Description: Description of franka_gripper
+Version: 0.10.1
+Cflags: -I/home/ravi/fr3_ws2/devel/include -I/home/ravi/fr3_ws2/src/franka_ros/franka_gripper/include -I/usr/include
+Libs: -L${prefix}/lib -lfranka_gripper /usr/lib/libfranka.so.0.15.0
+Requires: roscpp message_runtime control_msgs actionlib sensor_msgs xmlrpcpp actionlib_msgs

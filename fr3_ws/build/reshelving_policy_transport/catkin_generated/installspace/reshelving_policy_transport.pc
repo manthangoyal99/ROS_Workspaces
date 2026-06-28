@@ -1,0 +1,8 @@
+prefix=/home/ravi/fr3_ws/install
+
+Name: reshelving_policy_transport
+Description: Description of reshelving_policy_transport
+Version: 0.0.1
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

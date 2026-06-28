@@ -1,0 +1,15 @@
+digraph G {
+"camera_base_link" -> "camera_base_depth_frame"[label="Broadcaster: /camera_base/realsense2_camera_manager\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1782313296.340 sec old)\nBuffer length: 0.000 sec\n"];
+"camera_base_depth_frame" -> "camera_base_depth_optical_frame"[label="Broadcaster: /camera_base/realsense2_camera_manager\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1782313296.340 sec old)\nBuffer length: 0.000 sec\n"];
+"camera_base_link" -> "camera_base_color_frame"[label="Broadcaster: /camera_base/realsense2_camera_manager\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1782313296.340 sec old)\nBuffer length: 0.000 sec\n"];
+"camera_base_aligned_depth_to_color_frame" -> "camera_base_color_optical_frame"[label="Broadcaster: /camera_base/realsense2_camera_manager\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1782313296.340 sec old)\nBuffer length: 0.000 sec\n"];
+"camera_base_link" -> "camera_base_aligned_depth_to_color_frame"[label="Broadcaster: /camera_base/realsense2_camera_manager\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1782313296.340 sec old)\nBuffer length: 0.000 sec\n"];
+"camera_base_link" -> "camera_base_infra1_frame"[label="Broadcaster: /camera_base/realsense2_camera_manager\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1782313296.340 sec old)\nBuffer length: 0.000 sec\n"];
+"camera_base_infra1_frame" -> "camera_base_infra1_optical_frame"[label="Broadcaster: /camera_base/realsense2_camera_manager\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1782313296.340 sec old)\nBuffer length: 0.000 sec\n"];
+"camera_base_link" -> "camera_base_infra2_frame"[label="Broadcaster: /camera_base/realsense2_camera_manager\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1782313296.340 sec old)\nBuffer length: 0.000 sec\n"];
+"camera_base_infra2_frame" -> "camera_base_infra2_optical_frame"[label="Broadcaster: /camera_base/realsense2_camera_manager\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1782313296.340 sec old)\nBuffer length: 0.000 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1782313296.340"[ shape=plaintext ] ;
+ }->"camera_base_link";
+}

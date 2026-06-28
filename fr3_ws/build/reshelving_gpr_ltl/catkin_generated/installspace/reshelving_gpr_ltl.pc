@@ -1,0 +1,8 @@
+prefix=/home/ravi/fr3_ws/install
+
+Name: reshelving_gpr_ltl
+Description: Description of reshelving_gpr_ltl
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

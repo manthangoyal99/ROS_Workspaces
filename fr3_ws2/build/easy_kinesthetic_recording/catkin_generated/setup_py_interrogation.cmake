@@ -1,0 +1,7 @@
+set(easy_kinesthetic_recording_SETUP_PY_SETUP_MODULE "distutils.core")
+set(easy_kinesthetic_recording_SETUP_PY_VERSION "0.0.0")
+set(easy_kinesthetic_recording_SETUP_PY_SCRIPTS "")
+set(easy_kinesthetic_recording_SETUP_PY_PACKAGES "easy_kinesthetic_recording")
+set(easy_kinesthetic_recording_SETUP_PY_PACKAGE_DIRS "src/easy_kinesthetic_recording")
+set(easy_kinesthetic_recording_SETUP_PY_MODULES "")
+set(easy_kinesthetic_recording_SETUP_PY_MODULE_DIRS "")

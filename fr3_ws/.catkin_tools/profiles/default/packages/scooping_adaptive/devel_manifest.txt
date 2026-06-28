@@ -1,0 +1,4 @@
+scooping_adaptive
+/home/ravi/fr3_ws/devel/.private/scooping_adaptive/lib/pkgconfig/scooping_adaptive.pc /home/ravi/fr3_ws/devel/lib/pkgconfig/scooping_adaptive.pc
+/home/ravi/fr3_ws/devel/.private/scooping_adaptive/share/scooping_adaptive/cmake/scooping_adaptiveConfig.cmake /home/ravi/fr3_ws/devel/share/scooping_adaptive/cmake/scooping_adaptiveConfig.cmake
+/home/ravi/fr3_ws/devel/.private/scooping_adaptive/share/scooping_adaptive/cmake/scooping_adaptiveConfig-version.cmake /home/ravi/fr3_ws/devel/share/scooping_adaptive/cmake/scooping_adaptiveConfig-version.cmake

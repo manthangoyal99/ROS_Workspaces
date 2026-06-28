@@ -1,0 +1,1 @@
+/home/ravi/pragma_ws/devel/.private/pragmabot/lib/pkgconfig/pragmabot.pc

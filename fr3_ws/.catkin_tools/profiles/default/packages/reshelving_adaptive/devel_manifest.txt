@@ -1,0 +1,4 @@
+reshelving_adaptive
+/home/ravi/fr3_ws/devel/.private/reshelving_adaptive/lib/pkgconfig/reshelving_adaptive.pc /home/ravi/fr3_ws/devel/lib/pkgconfig/reshelving_adaptive.pc
+/home/ravi/fr3_ws/devel/.private/reshelving_adaptive/share/reshelving_adaptive/cmake/reshelving_adaptiveConfig.cmake /home/ravi/fr3_ws/devel/share/reshelving_adaptive/cmake/reshelving_adaptiveConfig.cmake
+/home/ravi/fr3_ws/devel/.private/reshelving_adaptive/share/reshelving_adaptive/cmake/reshelving_adaptiveConfig-version.cmake /home/ravi/fr3_ws/devel/share/reshelving_adaptive/cmake/reshelving_adaptiveConfig-version.cmake

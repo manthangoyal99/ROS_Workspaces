@@ -1,0 +1,9 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~activate_tool_compensation" : \b [bool] trigger to activate external tool compensation (the desired compensation forces defined in ./config) min: False, default: True, max: True
+- \b "~set_locked_joints_position" : \b [bool] Set current joint configuration to lock joints min: False, default: False, max: True
+- \b "~activate_lock_joint6" : \b [bool] trigger to lock/unlock joint6 min: False, default: False, max: True
+- \b "~activate_lock_joint7" : \b [bool] trigger to lock/unlock joint7 min: False, default: False, max: True
+

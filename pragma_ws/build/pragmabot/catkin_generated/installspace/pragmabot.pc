@@ -1,0 +1,8 @@
+prefix=/home/ravi/pragma_ws/install
+
+Name: pragmabot
+Description: Description of pragmabot
+Version: 0.1.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: rospy std_msgs sensor_msgs geometry_msgs message_filters cv_bridge image_transport topic_tools tf

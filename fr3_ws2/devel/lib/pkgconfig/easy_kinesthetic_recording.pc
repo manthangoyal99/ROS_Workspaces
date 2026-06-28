@@ -1,0 +1,8 @@
+prefix=/home/ravi/fr3_ws2/devel
+
+Name: easy_kinesthetic_recording
+Description: Description of easy_kinesthetic_recording
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: rospy roscpp

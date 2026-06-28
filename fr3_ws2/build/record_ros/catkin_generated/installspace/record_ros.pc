@@ -1,0 +1,8 @@
+prefix=/home/ravi/fr3_ws2/install
+
+Name: record_ros
+Description: Description of record_ros
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib -lrecord_ros
+Requires: roscpp message_runtime std_msgs

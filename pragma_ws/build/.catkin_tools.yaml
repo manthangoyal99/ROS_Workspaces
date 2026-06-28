@@ -1,0 +1,6 @@
+devel_space: /home/ravi/pragma_ws/devel
+install: false
+install_space: /home/ravi/pragma_ws/install
+profile: default
+source_space: /home/ravi/pragma_ws/src
+workspace: /home/ravi/pragma_ws

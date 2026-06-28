@@ -1,0 +1,6 @@
+franka_ros/franka_hw
+/home/ravi/fr3_ws/devel/.private/franka_hw/lib/libfranka_control_services.so /home/ravi/fr3_ws/devel/lib/libfranka_control_services.so
+/home/ravi/fr3_ws/devel/.private/franka_hw/lib/libfranka_hw.so /home/ravi/fr3_ws/devel/lib/libfranka_hw.so
+/home/ravi/fr3_ws/devel/.private/franka_hw/lib/pkgconfig/franka_hw.pc /home/ravi/fr3_ws/devel/lib/pkgconfig/franka_hw.pc
+/home/ravi/fr3_ws/devel/.private/franka_hw/share/franka_hw/cmake/franka_hwConfig-version.cmake /home/ravi/fr3_ws/devel/share/franka_hw/cmake/franka_hwConfig-version.cmake
+/home/ravi/fr3_ws/devel/.private/franka_hw/share/franka_hw/cmake/franka_hwConfig.cmake /home/ravi/fr3_ws/devel/share/franka_hw/cmake/franka_hwConfig.cmake

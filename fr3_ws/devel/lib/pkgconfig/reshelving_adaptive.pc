@@ -1,0 +1,8 @@
+prefix=/home/ravi/fr3_ws/devel
+
+Name: reshelving_adaptive
+Description: Description of reshelving_adaptive
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,0 +1,7 @@
+set(pragmabot_SETUP_PY_SETUP_MODULE "distutils.core")
+set(pragmabot_SETUP_PY_VERSION "0.1.0")
+set(pragmabot_SETUP_PY_SCRIPTS "")
+set(pragmabot_SETUP_PY_PACKAGES "pragmabot")
+set(pragmabot_SETUP_PY_PACKAGE_DIRS "src/pragmabot")
+set(pragmabot_SETUP_PY_MODULES "")
+set(pragmabot_SETUP_PY_MODULE_DIRS "")
