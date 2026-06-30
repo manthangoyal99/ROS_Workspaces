@@ -1,0 +1,7 @@
+-r requirements-base.txt
+# Ubuntu/ROS additions (install after ROS setup)
+# rospkg  -- install via apt: python3-rospkg
+# cv_bridge -- install via apt: ros-noetic-cv-bridge
+opencv-python>=4.5
+torch>=2.0
+torchvision>=0.15

@@ -1,0 +1,18 @@
+<launch>
+    <!-- Arguments for the skill and object -->
+    <arg name="skill_name" default="pick" />
+    <arg name="object_name" default="apple" />
+    <arg name="object2_name" default="" />
+    
+    <!-- Optional: The path to the data directory for trajectories and keypoints -->
+    <arg name="data_dir" default="/home/ravi/fr3_ws/src/TPGPT_two_args/data" />
+
+    <!-- Start the Skill Executor Node -->
+    <!-- Note: Package name is reshelving_policy_transport as defined in your package.xml -->
+    <node name="skill_executor" pkg="TPGPT_two_args" type="skill_executor.py" output="screen">
+        <param name="skill_name" value="$(arg skill_name)" />
+        <param name="object_name" value="$(arg object_name)" />
+        <param name="object2_name" value="$(arg object2_name)" />
+        <param name="data_dir" value="$(arg data_dir)" />
+    </node>
+</launch>

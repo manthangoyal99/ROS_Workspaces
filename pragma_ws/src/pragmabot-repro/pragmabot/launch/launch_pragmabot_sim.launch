@@ -1,0 +1,26 @@
+<launch>
+  <!-- PragmaBot in Franka Gazebo simulation.
+
+       Brings up franka_gazebo + panda_moveit_config + pragmabot_node so the
+       full pipeline (perception=stub, robot.backend=franka_ros) can be
+       exercised end-to-end on a developer workstation with no real arm. -->
+
+  <arg name="config_path" default="$(find pragmabot)/config/config.yaml" />
+  <arg name="controller" default="position_joint_trajectory_controller" />
+  <arg name="world" default="$(find franka_gazebo)/world/stone.sdf" />
+
+  <include file="$(find franka_gazebo)/launch/panda.launch">
+    <arg name="x" value="0" />
+    <arg name="y" value="0" />
+    <arg name="z" value="0" />
+    <arg name="world" value="$(arg world)" />
+    <arg name="controller" value="$(arg controller)" />
+    <arg name="rviz" value="true" />
+  </include>
+
+  <include file="$(find panda_moveit_config)/launch/panda_moveit.launch" />
+
+  <node pkg="pragmabot" type="pragmabot_node.py" name="pragmabot_node" output="screen">
+    <param name="config_path" value="$(arg config_path)" />
+  </node>
+</launch>

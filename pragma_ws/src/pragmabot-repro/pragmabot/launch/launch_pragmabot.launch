@@ -1,0 +1,56 @@
+<launch>
+  <!-- Full PragmaBot launch.
+
+       use_real_robot:=true  → bring up franka_control + panda_moveit_config
+                              for a physical Franka (needs robot_ip).
+       use_real_robot:=false (default) → bring up the panda_moveit_config
+                              demo (fake controller + MoveIt + RViz).
+
+       The pragmabot pipeline runs whether robot.backend in config.yaml is
+       stub or franka_ros — the launch only chooses which ROS stack is up. -->
+
+  <arg name="config_path" default="$(find pragmabot)/config/config.yaml"
+       doc="Path to the PragmaBot YAML config" />
+  <arg name="use_real_robot" default="false"
+       doc="If true, run franka_control + panda_moveit instead of the demo." />
+  <arg name="robot_ip" default=""
+       doc="Franka FCI IP (required when use_real_robot:=true)" />
+  <arg name="venv_site_packages"
+       default="$(env HOME)/pragma_ws/src/pragmabot-repro/.venv/lib/python3.8/site-packages"
+       doc="Path to the venv site-packages directory to prepend to PYTHONPATH" />
+
+  <!-- 1. Static TF: camera optical frame above panda_link0.
+            Adjust translation/rotation to match your real mounting. -->
+  <node pkg="tf2_ros" type="static_transform_publisher"
+        name="camera_to_base_tf"
+        args="0.0 0.0 0.6 0 0 0 panda_link0 camera_color_optical_frame" />
+
+  <!-- 2. Simulation: panda_moveit demo (fake_execution + MoveIt). -->
+  <!--    use_rviz:=false so we own the RViz node below and can mark it optional. -->
+  <group unless="$(arg use_real_robot)">
+    <include file="$(find panda_moveit_config)/launch/demo.launch">
+      <arg name="use_rviz" value="false" />
+    </include>
+  </group>
+
+  <!-- 3. Real robot: franka_control + panda_moveit. -->
+  <group if="$(arg use_real_robot)">
+    <include file="$(find franka_control)/launch/franka_control.launch">
+      <arg name="robot_ip" value="$(arg robot_ip)" />
+    </include>
+    <include file="$(find panda_moveit_config)/launch/panda_moveit.launch" />
+  </group>
+
+  <!-- 4. RViz — optional, so a missing display does not kill the launch. -->
+  <node pkg="rviz" type="rviz" name="rviz"
+        required="false"
+        args="-d $(find pragmabot)/viz/pragmabot.rviz" />
+
+  <!-- 5. PragmaBot node — venv site-packages prepended to PYTHONPATH so the
+            ROS-spawned python picks up our pinned gradio / omegaconf / etc. -->
+  <node pkg="pragmabot" type="pragmabot_node.py" name="pragmabot" output="screen">
+    <env name="PYTHONPATH"
+         value="$(arg venv_site_packages):$(optenv PYTHONPATH)" />
+    <param name="config_path" value="$(arg config_path)" />
+  </node>
+</launch>

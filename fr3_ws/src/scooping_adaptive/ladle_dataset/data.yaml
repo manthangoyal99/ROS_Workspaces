@@ -1,0 +1,13 @@
+# Path to your dataset (It is usually best to use an absolute path)
+path: /home/ravi/fr3_ws/src/scooping_adaptive/ladle_dataset
+
+# Paths to the train and val image folders (relative to the path above)
+train: images/train
+val: images/val
+
+# Number of classes
+nc: 1
+
+# Class names
+names: 
+  0: grain_mass

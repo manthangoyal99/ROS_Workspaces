@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<launch>
+    <arg name="robot_ip" default="192.168.1.13" /> <arg name="load_gripper" default="true" />
+    <arg name="robot" default="panda" />            <arg name="arm_id" default="$(arg robot)" />
+
+    <include file="$(find franka_control)/launch/franka_control.launch">
+        <arg name="robot_ip" value="$(arg robot_ip)" />
+        <arg name="load_gripper" value="$(arg load_gripper)" />
+        <arg name="robot" value="$(arg robot)" />
+        <arg name="arm_id" value="$(arg arm_id)" />
+    </include>
+
+    <rosparam command="load" file="$(find franka_example_controllers)/config/franka_example_controllers.yaml" subst_value="true" />
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="cartesian_impedance_example_controller"/>
+    
+    <node pkg="rviz" type="rviz" output="screen" name="rviz" args="-d $(find franka_example_controllers)/launch/rviz/franka_description_with_marker.rviz"/>
+    <node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure" required="false" />
+
+    <!-- <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+        <arg name="align_depth" value="true"/>
+        <arg name="color_width" value="640"/>
+        <arg name="color_height" value="480"/>
+        <arg name="color_fps" value="30"/>
+    </include> -->
+
+
+    <node pkg="camera_calibration" type="eye_hand_tf.py" name="eye_hand_tf_node" output="screen" />
+
+    <node pkg="reshelving_adaptive" type="target_keypoint_pub.py" name="live_vision_node" output="screen" />
+
+    <node pkg="reshelving_adaptive" type="proposition_monitor.py" name="atomic_state_monitor" output="screen" />
+
+    <node pkg="reshelving_adaptive" type="resilient_controller.py" name="resilient_controller" output="screen" launch-prefix="bash -c 'sleep 3; $0 $@' " />
+
+</launch>

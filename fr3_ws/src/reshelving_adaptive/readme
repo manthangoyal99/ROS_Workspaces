@@ -1,0 +1,13 @@
+Keypoint detection
+
+roslaunch franka_example_controllers  gravity_compensation.launch robot_ip:=192.168.1.13
+rosrun camera_calibration eye_hand_tf.py
+rosrun reshelving_policy_transport keypoint_detector.py 
+
+Demo REcorder
+
+Run launch file of recorder
+
+New situation
+
+RUn launch file

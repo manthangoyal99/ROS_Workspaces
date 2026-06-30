@@ -1,0 +1,182 @@
+# PragmaBot reproduction — runtime configuration.
+# All pluggable components default to stub backends for Mac dev.
+
+mode: rosbag_replay   # or: live
+
+vlm:
+  backend: openai       # stub | ollama | openai
+  model: gpt-4o
+  temperature: 0.0
+  max_tokens: 512
+  # Ollama-specific
+  ollama_host: http://localhost:11434
+  # OpenAI-specific (model overrides for live use, e.g., gpt-4o-2024-08-06)
+
+embeddings:
+  backend: openai       # stub | sentence_transformers | openai
+  model: text-embedding-3-small
+  dim: 64             # used by the stub embedder only
+
+perception:
+  backend: grounded_sam                  # stub | grounded_sam
+  confidence_threshold: 0.3
+  text_threshold: 0.25
+  # grounded_sam paths (only needed if backend: grounded_sam)
+  grounding_dino_config: /home/ravi/pragma_ws/src/pragmabot-repro/.venv/lib/python3.8/site-packages/groundingdino/config/GroundingDINO_SwinT_OGC.py
+  grounding_dino_checkpoint: /home/ravi/pragmabot_models/groundingdino_swint_ogc.pth
+  sam_checkpoint: /home/ravi/pragmabot_models/sam_vit_b_01ec64.pth
+  sam_model_type: vit_b
+  device: cpu
+  # Annotation behaviour
+  annotation:
+    fps_n_candidates: 5          # how many FPS points per mask
+    push_n_directions: 4         # candidate push endpoints around an object
+    push_distance_px: 80
+
+camera:
+  fx: 615.0
+  fy: 615.0
+  cx: 320.0
+  cy: 240.0
+  width: 640
+  height: 480
+  depth_scale: 0.001             # RealSense default: raw depth in mm → meters
+
+robot:
+  backend: stub                          # stub | franka_ros
+  planning_group: panda_arm
+  gripper_group: panda_hand
+  ee_link: panda_hand_tcp
+  camera_frame: camera_color_optical_frame
+  robot_base_frame: panda_link0
+  move_group_timeout: 10.0               # seconds
+  cartesian_eef_step: 0.01               # meters, Cartesian path resolution
+  cartesian_jump_threshold: 0.0          # 0 = disable jump check
+  approach_height_offset: 0.12           # meters, pre-grasp standoff above object
+  retreat_height_offset: 0.15            # meters, retreat above grasp
+  grasp_depth_offset: 0.005              # meters, sink into object at grasp
+  push_standoff: 0.05                    # meters behind object before push
+  max_velocity_scaling: 0.3              # fraction of max joint velocity
+  max_acceleration_scaling: 0.3
+  place_height_offset: 0.05              # meters above target for place
+  workspace_limits:                      # SAFETY — see _check_workspace_limits
+    x: [0.20, 0.70]
+    y: [-0.40, 0.40]
+    z: [0.00, 0.60]
+  grasp:
+    backend: top_down                    # top_down | anygrasp (anygrasp NIY)
+    approach_height: 0.12
+    grasp_height_offset: 0.005
+
+memory:
+  ltm_path: pragmabot/data/ltm/ltm.csv
+  embeddings_path: pragmabot/data/ltm/ltm_embeddings.npy
+  top_k: 3
+  activate_stm: true
+  activate_ltm: true
+  save_to_ltm: true
+
+pipeline:
+  max_steps: 10
+  available_skills:
+    - pick
+    - place
+    - push
+
+prompts:
+  scene_describer: |
+    You are a robot's visual perception system. The robot has been given the
+    instruction: "{instruction}". Describe the current scene in 1-3 sentences,
+    focusing on the objects relevant to completing the task and any obstacles
+    or spatial relationships that matter. Be concise and factual.
+
+  task_planner: |
+    You are a robot task planner. You must choose the next action to complete
+    the task.
+
+    Instruction: {instruction}
+    Available skills: {available_skills}
+
+    {ltm_section}
+
+    Action history so far:
+    {stm_text}
+
+    Current observation: [IMAGE]
+
+    {reflection_instruction}
+
+    Respond ONLY with a JSON object in this exact format:
+    {{
+      "skill": "<skill_name>",
+      "parameters": {{<skill_specific_params>}},
+      "reasoning": "<brief chain-of-thought>"
+    }}
+
+  task_planner_reflection: |
+    Your previous action failed. Reflect on why it failed based on the action
+    history and current observation, then choose a better action.
+
+  task_planner_ltm: |
+    Here are relevant past experiences that may help:
+    {experiences}
+
+  success_detector: |
+    You are a robot action evaluator. A robot attempted the following action
+    to complete a task.
+
+    Task instruction: {instruction}
+    Action attempted: {action_description}
+
+    You are shown two images: BEFORE the action and AFTER the action.
+    Before: [IMAGE_1]
+    After: [IMAGE_2]
+
+    Evaluate the outcome. Respond ONLY with a JSON object:
+    {{
+      "action_success": <true|false>,
+      "task_complete": <true|false>,
+      "scene_change": "<what visually changed between before and after>",
+      "reasoning": "<brief explanation>"
+    }}
+
+  exp_summarizer: |
+    You are a robot experience summarizer. A robot just completed a task.
+    Summarize what the robot learned in a way that will help it plan better
+    in similar future situations.
+
+    Task: {instruction}
+    Initial scene: {scene_description}
+    What happened (step by step):
+    {stm_text}
+
+    Write a concise summary (3-5 sentences) that captures:
+    1. What obstacles or difficulties were encountered
+    2. What strategies failed and why
+    3. What strategy ultimately worked
+    4. A generalizable insight for similar tasks
+
+    Write in third person as a reusable lesson, not a narrative.
+
+ros:
+  rgb_topic: /camera/color/image_raw
+  depth_topic: /camera/depth/image_rect_raw
+  camera_info_topic: /camera/color/camera_info
+  image_timeout_sec: 5.0
+  rosbag_replay: false                       # set true in replay mode
+  republish_rgb_topic: /pragmabot/camera/rgb
+  republish_depth_topic: /pragmabot/camera/depth
+  image_click_topic: /pragmabot/image_click
+  use_compressed_rgb: false
+
+gradio:
+  host: 0.0.0.0
+  port: 7861
+  share: false
+
+logging:
+  log_dir: pragmabot/data/logs
+  level: INFO
+  save_episodes: true                    # write one JSON file per run_task
+  save_images: false                     # if true, also dump before/after frames
+  image_dir: pragmabot/data/images

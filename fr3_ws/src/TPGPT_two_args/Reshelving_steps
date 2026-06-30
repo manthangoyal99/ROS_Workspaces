@@ -1,0 +1,24 @@
+Start realsense form realsense_ws -> roslaunch realsense2_camera rs_camera.launch align_depth:=true
+Start cartesian impedance controller so that we ca get the robots transforms -> roslaunch franka_example_controllers cartesian_impedance_example_controller.launch robot_ip:=192.168.1.13
+Start broadcasting the static transform from Base to Camera (After calibration; use the saved caliobration results) -> rosrun camera_calibration eye_hand_tf.py
+To get the keypoint_detector working -> rosrun reshelving_policy_transport keypoint_detector.py -> press s to save source; press t to save target; press q to exit
+
+
+
+roslaunch franka_example_controllers cartesian_impedance_example_controller.launch robot_ip:=192.168.1.12
+roslaunch franka_example_controllers cartesian_impedance_example_controller.launch robot_ip:=192.168.1.12
+roslaunch franka_example_controllers gravity_compensation.launch robot_ip:=192.168.1.12
+
+rosrun camera_calibration eye_hand_tf.py
+roslaunch realsense2_camera rs_aligned_depth.launch     align_depth:=true     camera:=camera_base
+roslaunch pragmabot foundationpose_tracking.launch object_names:="['bowl', mustard0]"
+docker exec -it foundationpose /opt/conda/envs/my/bin/python /workspace/server_inference.py
+rosrun TPGPT_two_args keypoint_detector.py --skill pick --objects mustard0 --ee_pos
+rosrun TPGPT_two_args skill_executor.py _skill_name:=pick _object_name:=mustard0 _data_dir:=/home/ravi/fr3_ws/src/TPGPT_two_args/data
+rosrun TPGPT_two_args traj_visualizer.py --skill pick
+rosrun TPGPT_two_args demo_recorder.py pick
+
+ssh manthan@10.72.18.159
+cd ssd_data/FoundationPose
+
+

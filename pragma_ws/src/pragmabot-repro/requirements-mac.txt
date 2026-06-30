@@ -1,0 +1,4 @@
+-r requirements-base.txt
+# Mac-only additions
+pytest>=7.0
+pytest-cov>=4.0

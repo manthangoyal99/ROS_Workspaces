@@ -1,0 +1,53 @@
+<!--
+  FoundationPose 6-DOF Tracking Launch File
+  ==========================================
+  Starts the Intel RealSense camera driver with aligned depth and the
+  ZMQ bridge node that connects to the remote FoundationPose GPU server.
+
+  Usage:
+    roslaunch pragmabot foundationpose_tracking.launch
+    roslaunch pragmabot foundationpose_tracking.launch server_ip:=10.72.18.159
+    roslaunch pragmabot foundationpose_tracking.launch server_ip:=10.72.18.159 server_port:=5555
+
+  Prerequisites:
+    1. The remote server (10.72.18.159) must have the FoundationPose Docker
+       container running with server_inference.py active on port 5555.
+    2. The Intel RealSense ROS package must be installed:
+       sudo apt install ros-noetic-realsense2-camera
+-->
+<launch>
+  <!-- ── Arguments ──────────────────────────────────────────────────── -->
+  <arg name="server_ip"      default="10.72.18.159"
+       doc="IP address of the remote FoundationPose GPU server" />
+  <arg name="server_port"    default="5555"
+       doc="TCP port for the ZMQ connection" />
+  <arg name="jpeg_quality"   default="80"
+       doc="JPEG compression quality for colour frames (1-100)" />
+  <arg name="zmq_timeout_ms" default="5000"
+       doc="ZMQ receive timeout in milliseconds" />
+
+  <arg name="camera_name"    default="camera_base"
+       doc="Namespace for the RealSense camera" />
+  <arg name="object_names"   default="['mustard0']"
+       doc="List of object names to track (yaml array format)" />
+
+  <!-- ── Intel RealSense Camera Driver ──────────────────────────────── 
+  <include file="$(find realsense2_camera)/launch/rs_aligned_depth.launch">
+    <arg name="align_depth" value="true" />
+    <arg name="camera"      value="$(arg camera_name)" />
+  </include> -->
+
+  <!-- ── ZMQ Bridge Node ────────────────────────────────────────────── -->
+  <node name="realsense_zmq_bridge"
+        pkg="pragmabot"
+        type="realsense_zmq_bridge.py"
+        output="screen"
+        respawn="false">
+    <param name="server_ip"      value="$(arg server_ip)" />
+    <param name="server_port"    value="$(arg server_port)" />
+    <param name="jpeg_quality"   value="$(arg jpeg_quality)" />
+    <param name="zmq_timeout_ms" value="$(arg zmq_timeout_ms)" />
+    <param name="camera_name"    value="$(arg camera_name)" />
+    <param name="object_names"   type="yaml" value="$(arg object_names)" />
+  </node>
+</launch>

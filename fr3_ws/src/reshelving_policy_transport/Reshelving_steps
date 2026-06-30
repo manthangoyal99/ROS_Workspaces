@@ -1,0 +1,7 @@
+Start realsense form realsense_ws -> roslaunch realsense2_camera rs_camera.launch align_depth:=true
+Start cartesian impedance controller so that we ca get the robots transforms -> roslaunch franka_example_controllers cartesian_impedance_example_controller.launch robot_ip:=192.168.1.13
+Start broadcasting the static transform from Base to Camera (After calibration; use the saved caliobration results) -> rosrun camera_calibration eye_hand_tf.py
+To get the keypoint_detector working -> rosrun reshelving_policy_transport keypoint_detector.py -> press s to save source; press t to save target; press q to exit
+
+
+
